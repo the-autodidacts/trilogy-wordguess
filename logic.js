@@ -46,3 +46,24 @@ function hasWon(puzzleState){
 function hasLost(guessesLeft){
     return !!!guessesLeft
 }
+
+function isEndOfRound(theRound){
+   return hasWon(theRound.puzzleState)|| hasLost(theRound.guessesLeft)
+}
+
+function setupGame(words,wins,losses){
+    return {
+        "round": setupRound(randomWord(words)),
+        "wins": wins,
+        "losses": losses
+    }
+}
+
+function startNewRound(theGame){
+    if(hasWon(theGame.round.puzzleState)){
+        theGame.wins++
+    }if(hasLost(theGame.round.guessesLeft)){
+        theGame.losses++
+    }
+    alert(theGame.round.word);
+}
