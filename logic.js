@@ -25,16 +25,24 @@ function setupRound(word){
         "word": word,
         "guessesLeft": 9,
         "wrongGuesses": [],
-        "puzzleState": getBlanks(word)
+        "puzzleState": []
     }
 }
 
 function updateRound(theRound, guess){
     if(isCorrectGuess(theRound.word, guess)){
-        theRound.guessesLeft--
         theRound.puzzleState = fillBlanks(theRound.word, theRound.puzzleState, guess)
     }else {
         theRound.guessesLeft--;
-        theRound.guessesLeft.push(guess)
+        theRound.wrongGuesses.push(guess)
     }
+    return theRound
+}
+
+function hasWon(puzzleState){
+    return !/_/g.test(puzzleState.join(""))
+}
+
+function hasLost(guessesLeft){
+    return !!!guessesLeft
 }
